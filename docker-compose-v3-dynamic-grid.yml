@@ -9,8 +9,6 @@ services:
       - ./assets:/opt/selenium/assets
       - ./NodeDocker/config.toml:/opt/bin/config.toml
       - /var/run/docker.sock:/var/run/docker.sock
-    networks:
-      - taiga
     depends_on:
       - selenium-hub
     environment:
@@ -31,16 +29,9 @@ services:
   selenium-hub:
     image: seleniarm/hub:4.20.0
     container_name: selenium-hub
-    networks:
-      - taiga
     ports:
       - "4442:4442"
       - "4443:4443"
       - "4444:4444"
     environment:
       SE_SESSION_REQUEST_TIMEOUT: 1800
-
-networks:
-  taiga:
-    external: true
-
